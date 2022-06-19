@@ -47,8 +47,12 @@ public class OnJoin implements Listener {
                     .setStyle(style)
                     .setTime(time)
                     .setProgress(progress);
-            UBossBar bb = bbb.build();
-            bb.getTimer().ifPresent(timer -> timer.setupTimer(bb));
+            if (time != -1) {
+                UBossBar bb = bbb.build();
+                bb.getTimer().ifPresent(timer -> timer.setupTimer(bb));
+            } else {
+                bbb.buildDead();
+            }
         }
         if (plugin.getConfig().getBoolean("OnJoin.Title.Enabled")) {
             String message = plugin.papiTranslate.getMessage(plugin.getConfig().getString("OnJoin.Title.Message"), p);
